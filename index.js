@@ -26,7 +26,7 @@ app.set("view engine", "pug");
 
 app.get("/", (req, res) => {
   //res.render(file path, variables)
-  res.render("index", { x: "vincent aF!@#" });
+  res.render("registration", { x: "vincent aF!@#" });
 });
 
 /**
