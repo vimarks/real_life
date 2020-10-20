@@ -1,0 +1,160 @@
+a {
+  font-family: Tahoma;
+  text-decoration: none;
+  color: white;
+}
+#nav {
+  border-bottom: 1px solid #257a25;
+}
+
+#nav a {
+  color: grey;
+}
+#nav a:hover {
+  color: pink;
+}
+
+#nav ul {
+  list-style-type: none;
+}
+
+#background {
+  width: 20%;
+  background-image: url("heic2007a.jpg");
+}
+
+#message {
+  width: 25%;
+  border-radius: 4px;
+  border: 1px solid #999999;
+  padding: 3px;
+  outline: none;
+}
+
+#message:hover {
+  background-color: #d0e2f0;
+  border: 1px solid #999999;
+}
+
+#chatroomForm {
+  text-align: center;
+}
+#chat {
+  table-layout: fixed;
+  width: 35%;
+  margin: 50px auto;
+  margin-top: 75px;
+  border-left: 1px solid;
+  border-right: 1px solid;
+  border-top: 1px solid;
+  text-align: left;
+}
+.messageTd {
+  width: 50%;
+  word-wrap: break-word;
+  text-align: justify;
+  padding: 10px;
+}
+
+.displayNameTd {
+  vertical-align: top;
+  font-weight: bold;
+  text-align: left;
+  padding: 10px;
+}
+
+tr {
+  border-bottom: 1px solid black;
+}
+#chatBody {
+  font-family: Courier;
+  font-size: 90%;
+  background-color: #f2f2f2;
+}
+#formBody {
+  font-family: Courier;
+  font-size: 90%;
+  margin-top: 100px;
+  background-color: #f2f2f2;
+  text-align: center;
+  line-height: 3.2em;
+  transition: line-height 2s;
+}
+
+#profilePage {
+  font-family: Courier;
+  font-size: 90%;
+  background-color: #f2f2f2;
+}
+
+#deleteForm {
+  font-family: Courier;
+  margin-top: 100px;
+}
+#transformer {
+  margin-bottom: -14px;
+}
+
+#transformer:hover {
+  color: #d56377;
+  cursor: pointer;
+}
+input[type="text"] {
+  width: 310px;
+  border-radius: 4px;
+  border: 1px solid #999999;
+  padding: 3px;
+  outline: none;
+}
+
+input[type="text"]:hover {
+  background-color: #d0e2f0;
+  border: 1px solid #999999;
+}
+
+input[type="password"] {
+  width: 310px;
+  border-radius: 4px;
+  margin-top: 10px;
+  border: 1px solid #999999;
+  padding: 3px;
+  outline: none;
+}
+
+input[type="password"]:hover {
+  background-color: #d0e2f0;
+  border: 1px solid #999999;
+}
+
+input[type="submit"] {
+  width: 318px;
+  border: 1px solid #006633;
+  background-color: #257a25;
+  color: #ffffff;
+  border-radius: 5px;
+  padding: 4px;
+  margin-top: 10px;
+}
+
+input[type="submit"]:hover {
+  border: 1px solid #006633;
+  background-color: #076607;
+  color: #ffffff;
+  cursor: pointer;
+}
+
+#title {
+  margin-bottom: -30px;
+}
+
+#landingText {
+  color: white;
+  font-size: 36pt;
+  text-align: center;
+}
+#landingText:hover {
+  color: black;
+  text-shadow: -2px -2px #666666;
+}
+#landingForm {
+}

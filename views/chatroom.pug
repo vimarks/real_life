@@ -1,0 +1,17 @@
+doctype html
+html
+    head
+        title chatroom
+        link(rel="stylesheet", href="/style.css")
+    body#chatBody
+        nav#nav
+            ul
+                li
+                    a(href="/logout") Logout
+                li
+                    a(href="/profile") Edit Profile
+    table#chat
+        script(src="/client.js" type="module")
+
+    form#chatroomForm( method='post' name='chatroomForm')
+        input#message
