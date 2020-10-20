@@ -1,0 +1,17 @@
+doctype html
+html
+    head
+        title login Form
+        link(rel="stylesheet", href="/style.css")
+        body#formBody
+            div
+                form#landingForm( method='post', action='/login', name='loginForm')
+                        p#landingP
+                            h1#title Login
+                            h5#transformer new? click to Sign Up
+                            input( type='text' name='username', size='30', placeholder='Username', required='required')
+                            br
+                            input( type='password' name='userpass', size='30', placeholder='Password', required='required')
+                            br
+                            input#landingSubmit( type='submit', value='Login' )
+            script(src="/login.js" type="module")

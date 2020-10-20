@@ -1,0 +1,23 @@
+doctype html
+html
+    head
+        title profile
+        link(rel="stylesheet", href="/style.css")
+        body#profilePage
+            nav#nav
+                ul
+                    li
+                        a(href="/logout") Logout
+                    li
+                        a(href="/chatroom") Chatroom
+            div#deleteForm
+                form( method='post', action='/login', name='loginForm')
+                        p
+                            h1.title Delete Profile
+                            input( type='text' name='username', size='30', placeholder='Username', required='required')
+                            br
+                            input( type='password' name='userpass', size='30', placeholder='Password', required='required')
+                            br
+                            input( type='submit', value='Delete' )
+
+                script(src="/client.js" type="module")
