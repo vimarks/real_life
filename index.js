@@ -8,6 +8,7 @@ const mongoose = require("mongoose");
 const cookieParser = require("cookie-parser");
 const ExpressWs = require("express-ws");
 const axios = require("axios");
+const puppeteer = require("puppeteer");
 // const auth = require("./routes/auth");
 User = require("./user-model");
 
@@ -41,7 +42,7 @@ app.use(express.static(path.join(__dirname, "public")));
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 app.use(cookieParser());
-// app.use("/auth", auth);
+
 /**
  * Routes Definitions
  */
@@ -94,11 +95,10 @@ app
       if (!user) {
         console.log("not user");
         res.status(500).send(reason);
-        // res.jsonp({ success: true });
       }
       if (user) {
         res.cookie("user", username, { maxAge: 360000 });
-        res.render("chatroom", { username: username });
+        res.render("chatroom", { getLink: getLink.getLink });
       }
     });
   });
@@ -154,16 +154,58 @@ app.ws("/messages", (webSocket, req) => {
     let unverifiedUser = req.cookies.user;
     User.findOne({ username: unverifiedUser }, function(err, obj) {
       let displayName = obj.displayName;
-      broadcast(displayName + message);
+      if (message === "typing link request") {
+        getLink(displayName);
+      } else broadcast(displayName + message);
     });
   });
 });
 
+async function getLink(displayName) {
+  const browser = await puppeteer.launch({
+    executablePath:
+      "/Applications/Google Chrome.app/Contents/MacOS/Google Chrome"
+  });
+  const page = await browser.newPage();
+  const response = await page.goto(
+    "https://keyboard-racing.com/personal-game.html"
+  );
+  await page.setUserAgent(
+    "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_14_1) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/73.0.3683.75 Safari/537.36"
+  );
+  await page.evaluate(() => {
+    let selector = document.getElementsByName("game_mode")[0];
+    selector.selectedIndex = 1;
+  });
+  await page.evaluate(() => {
+    let submit = document.querySelector("[type=submit]");
+    submit.click();
+  });
+  await page.waitForTimeout(1500);
+
+  // let hostURL = await page.url();
+  const hostURL = await page.$$eval(
+    "input",
+    items => items.map(item => item.value)[55]
+  );
+  await broadcast(`${displayName} ${hostURL}`);
+
+  await page.waitForTimeout(10000);
+
+  await page.$$eval("a", items =>
+    items.filter(item => item.innerHTML === "Start now!")[0].click()
+  );
+  // await page.screenshot({ path: "racer.png", fullPage: true });
+
+  await browser.close();
+}
+
 function broadcast(data) {
-  ws.getWss("/messages").clients.forEach(client => {
+  ws.getWss().clients.forEach(client => {
     client.send(data);
   });
 }
+
 /**
  * Server Activation
  */

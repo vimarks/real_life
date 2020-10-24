@@ -15,28 +15,42 @@ connection.onerror = error => {
 };
 
 connection.onmessage = event => {
-  console.log("received", event.data);
   let td1 = document.createElement("td");
   let td2 = document.createElement("td");
   let tr = document.createElement("tr");
-  let message = event.data.substr(event.data.indexOf(" ") + 1);
-  let displayName = event.data.match(/\w+ /);
-  // let message = event.data.match(/ .+$/);
 
-  // tr.classList.add("messageTr");
+  let message = event.data.substr(event.data.indexOf(" ") + 1);
+  if (/^http:\/\/key-race\.com/.test(message)) {
+    let a = document.createElement("a");
+    a.href = message;
+    a.innerText = message;
+    a.target = "_blank";
+    td2.append(a);
+    td2.classList.add("linkTd");
+  } else {
+    td2.innerText = message;
+    td2.classList.add("messageTd");
+  }
+
+  let displayName = event.data.match(/\w+ /);
   td1.innerText = displayName;
-  td2.innerText = message;
+
   td1.classList.add("displayNameTd");
-  td2.classList.add("messageTd");
+
   document.getElementById("chat").append(tr);
   tr.append(td1);
   tr.append(td2);
 };
 
-console.log("chatroomForm", document.getElementById("chatroomForm"));
 document.getElementById("chatroomForm").addEventListener("submit", event => {
   event.preventDefault();
   let message = document.querySelector("#message").value;
   connection.send(` ${message}`);
   document.querySelector("#message").value = "";
+});
+
+document.getElementById("getLink").addEventListener("click", event => {
+  event.preventDefault();
+  console.log("link request hit");
+  connection.send(`typing link request`);
 });
