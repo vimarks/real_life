@@ -1,7 +1,7 @@
 a {
   font-family: Tahoma;
   text-decoration: none;
-  color: white;
+  color: blue;
 }
 #nav {
   border-bottom: 1px solid #257a25;
@@ -37,7 +37,6 @@ a {
 }
 
 #chatroomForm {
-  text-align: center;
 }
 #chat {
   table-layout: fixed;
@@ -55,12 +54,43 @@ a {
   text-align: justify;
   padding: 10px;
 }
+.linkTx {
+  width: 50%;
+  color: black;
+  word-wrap: break-word;
+  text-align: justify;
+  padding: 10px;
+}
+
+#userInputForm {
+  text-align: center;
+}
+
+#getLink {
+  margin-top: 20px;
+  margin-left: -231px;
+}
 
 .displayNameTd {
   vertical-align: top;
   font-weight: bold;
   text-align: left;
   padding: 10px;
+}
+
+input[type="button"] {
+  border: 1px solid #006633;
+  background-color: #257a25;
+  color: #ffffff;
+  padding: 2px;
+  border-radius: 4px;
+}
+
+input[type="button"]:hover {
+  border: 1px solid #006633;
+  background-color: #076607;
+  color: #ffffff;
+  cursor: pointer;
 }
 
 tr {
