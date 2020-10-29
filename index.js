@@ -155,6 +155,7 @@ app.ws("/messages", (webSocket, req) => {
     User.findOne({ username: unverifiedUser }, function(err, obj) {
       let displayName = obj.displayName;
       if (message === "typing link request") {
+        broadcast("TOGGLECURSOR");
         getLink(displayName);
       } else broadcast(displayName + message);
     });
@@ -181,13 +182,13 @@ async function getLink(displayName) {
     let submit = document.querySelector("[type=submit]");
     submit.click();
   });
-  await page.waitForTimeout(1500);
+  await page.waitForTimeout(2300);
 
-  // let hostURL = await page.url();
   const hostURL = await page.$$eval(
     "input",
     items => items.map(item => item.value)[55]
   );
+
   await broadcast(`${displayName} ${hostURL}`);
 
   await page.waitForTimeout(10000);
@@ -206,9 +207,9 @@ function broadcast(data) {
   });
 }
 
-/**
- * Server Activation
- */
+/*
+ Server Activation
+*/
 app.listen(port, () => {
   console.log(`Hello! we listen on port:${port}`);
 });
