@@ -15,31 +15,36 @@ connection.onerror = error => {
 };
 
 connection.onmessage = event => {
+  console.log("MESSAGE", event.data);
   let td1 = document.createElement("td");
   let td2 = document.createElement("td");
   let tr = document.createElement("tr");
+  let body = document.getElementById("chatBody");
+  let displayName = event.data.match(/\w+ /);
 
   let message = event.data.substr(event.data.indexOf(" ") + 1);
   if (/^http:\/\/key-race\.com/.test(message)) {
+    body.classList.toggle("progress");
     let a = document.createElement("a");
     a.href = message;
     a.innerText = message;
     a.target = "_blank";
     td2.append(a);
     td2.classList.add("linkTd");
+  } else if (event.data === "TOGGLECURSOR") {
+    body.classList.toggle("progress");
   } else {
     td2.innerText = message;
     td2.classList.add("messageTd");
   }
 
-  let displayName = event.data.match(/\w+ /);
-  td1.innerText = displayName;
-
-  td1.classList.add("displayNameTd");
-
-  document.getElementById("chat").append(tr);
-  tr.append(td1);
-  tr.append(td2);
+  if (displayName) {
+    td1.innerText = displayName;
+    td1.classList.add("displayNameTd");
+    document.getElementById("chat").append(tr);
+    tr.append(td1);
+    tr.append(td2);
+  }
 };
 
 document.getElementById("chatroomForm").addEventListener("submit", event => {
